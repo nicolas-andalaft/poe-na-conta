@@ -1,25 +1,39 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(ItemHolder))]
 public class ItemHolderDetector : MonoBehaviour {
 
-    [SerializeField] private ItemHolder playerItemHolder;
-    private List<ItemHolder> selectedItemHolders;
+    [SerializeField] int playerIndex;
+    ItemHolder playerItemHolder;
+    List<ItemHolder> selectedItemHolders;
 
-    private void Awake() {
+    void Awake() {
         selectedItemHolders = new List<ItemHolder>();
+        playerItemHolder = GetComponent<ItemHolder>();
     }
 
-    private void OnTriggerEnter(Collider other) {
+    void Start() {
+        EventManager.current.onFirePerformed += onInteract;
+    }
+
+    void OnDestroy() {
+        EventManager.current.onFirePerformed -= onInteract;
+    }
+
+    void OnTriggerEnter(Collider other) {
         ItemHolder holder = other.GetComponent<ItemHolder>();
         if (holder != null) {
-            selectedItemHolders.Add(holder);
-            holder.highlightObject();
+            if (holder.gameObject.tag != "Player" || !holder.isEmpty()) {
+                selectedItemHolders.Add(holder);
+                holder.highlightObject();
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other) {
+    void OnTriggerExit(Collider other) {
         ItemHolder holder = other.GetComponent<ItemHolder>();
         if (holder != null) {
             selectedItemHolders.Remove(holder);
@@ -27,8 +41,8 @@ public class ItemHolderDetector : MonoBehaviour {
         }
     }
 
-    public void onInteract() {
-        if (selectedItemHolders.Count > 0) {
+    public void onInteract(int playerIndex) {
+        if (playerIndex == this.playerIndex && selectedItemHolders.Any()) {
             if (playerItemHolder.isEmpty()) {
                 playerItemHolder.placeItem(selectedItemHolders[0].takeOutItem());
             }

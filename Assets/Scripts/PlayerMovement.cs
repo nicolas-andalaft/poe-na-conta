@@ -3,13 +3,24 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerControls))]
 public class PlayerMovement : MonoBehaviour {
 
-    [SerializeField] private float velocity = 1.0f;
-    private PlayerControls playerControls;
-    private bool shouldMove = false;
-    private Vector2 movement = new Vector2();
+    [SerializeField] int playerIndex;
+    [SerializeField] float velocity = 1.0f;
+    PlayerControls playerControls;
+    bool shouldMove = false;
+    Vector2 movement = new Vector2();
+
+    void Awake() {
+        playerControls = GetComponent<PlayerControls>();
+    }
 
     void Start() {
-        playerControls = GetComponent<PlayerControls>();
+        EventManager.current.onMovePerformed += startMovement;
+        EventManager.current.onMoveCanceled += stopMovement;
+    }
+
+    void OnDestroy() {
+        EventManager.current.onMovePerformed -= startMovement;
+        EventManager.current.onMoveCanceled -= stopMovement;
     }
 
     void Update() {
@@ -19,11 +30,15 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void startMovement() {
-        shouldMove = true;
+    public void startMovement(int playerIndex) {
+        if (playerIndex == this.playerIndex) {
+            shouldMove = true;
+        }
     }
 
-    public void stopMovement() {
-        shouldMove = false;
+    public void stopMovement(int playerIndex) {
+        if (playerIndex == this.playerIndex) {
+            shouldMove = false;
+        }
     }
 }

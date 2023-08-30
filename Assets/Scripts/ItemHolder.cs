@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour {
 
-    [SerializeField] private Transform slotPosition;
-    [SerializeField] private GameObject item;
-    [SerializeField] private Renderer highlightRenderer;
+    [SerializeField] Transform slotPosition;
+    [SerializeField] GameObject item;
+    [SerializeField] Renderer highlightRenderer;
 
     void OnEnable() {
         if (slotPosition == null) {

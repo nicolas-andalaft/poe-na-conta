@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1334224404598305822}
   - component: {fileID: 7176749255420066769}
   - component: {fileID: 5547553602137501571}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 8407868067172332116}
   - component: {fileID: 8420061867912507496}
   - component: {fileID: 5650042798079331062}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7078585195286783786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
