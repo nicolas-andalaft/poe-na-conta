@@ -148,11 +148,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6294727691938032820}
   - component: {fileID: 1688268397990753943}
-  - component: {fileID: 2201862355389486482}
+  - component: {fileID: 1985180205997064541}
   - component: {fileID: 5655574653570274329}
   - component: {fileID: 5540102454143272154}
   - component: {fileID: 6784724484721135868}
-  - component: {fileID: 5095010538085056258}
+  - component: {fileID: 2056291797991529754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -204,8 +204,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &2201862355389486482
-SphereCollider:
+--- !u!136 &1985180205997064541
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -222,8 +222,10 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 1.7
+  m_Height: 5
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5655574653570274329
 MonoBehaviour:
@@ -264,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPosition: {fileID: 9031831328680483035}
   item: {fileID: 0}
---- !u!114 &5095010538085056258
+--- !u!114 &2056291797991529754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +275,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4310501180865754080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f07b4e6488069241b438add409ad32c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c3997f56d2edbe4aac1f387bad08614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1
+  playerItemHolder: {fileID: 6784724484721135868}

@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(ItemHolderDetector))]
 public class PlayerControls : MonoBehaviour {
 
     private PlayerMovement playerMovement;
+    private ItemHolderDetector itemHolderDetector;
     private PlayerInputActions playerInputActions;
     private InputAction moveAction;
     private InputAction fireAction;
@@ -17,7 +19,7 @@ public class PlayerControls : MonoBehaviour {
 
         fireAction = playerInputActions.Player.Fire;
         fireAction.Enable();
-        fireAction.performed += OnFirePerformed;
+        fireAction.performed += _ => itemHolderDetector.onInteract();
     }
 
     void OnDisable() {
@@ -28,10 +30,7 @@ public class PlayerControls : MonoBehaviour {
     void Awake() {
         playerInputActions = new PlayerInputActions();
         playerMovement = GetComponent<PlayerMovement>();
-    }
-
-    void OnFirePerformed(InputAction.CallbackContext context) {
-        Debug.Log("fire");
+        itemHolderDetector = GetComponent<ItemHolderDetector>();
     }
 
     public InputAction getMoveAction() {

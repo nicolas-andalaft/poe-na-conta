@@ -4,11 +4,16 @@ public class ItemHolder : MonoBehaviour {
 
     [SerializeField] private Transform slotPosition;
     [SerializeField] private GameObject item;
+    [SerializeField] private Renderer highlightRenderer;
 
     void OnEnable() {
         if (slotPosition == null) {
             enabled = false;
         }
+    }
+
+    public bool isEmpty() {
+        return item == null;
     }
 
     public void placeItem(GameObject newItem) {
@@ -17,9 +22,21 @@ public class ItemHolder : MonoBehaviour {
         item.transform.localPosition = Vector3.zero;
     }
 
-    public GameObject takeItem() {
+    public GameObject takeOutItem() {
         GameObject aux = item;
         item = null;
         return aux;
+    }
+
+    public void highlightObject() {
+        if (highlightRenderer != null) {
+            highlightRenderer.material.color = new Color(0f, 0f, 1f, 1f);
+        }
+    }
+
+    public void unhighlightObject() {
+        if (highlightRenderer != null) {
+            highlightRenderer.material.color = new Color(1f, 1f, 1f, 1f);
+        }
     }
 }
