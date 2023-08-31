@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ItemHolder : MonoBehaviour {
+public class Slot : MonoBehaviour, IInteractable {
 
     [SerializeField] Transform slotPosition;
-    [SerializeField] GameObject item;
     [SerializeField] Renderer highlightRenderer;
+    [SerializeField] Item item;
 
     void OnEnable() {
         if (slotPosition == null) {
@@ -12,28 +12,28 @@ public class ItemHolder : MonoBehaviour {
         }
     }
 
-    public bool isEmpty() {
-        return item == null;
-    }
-
-    public void placeItem(GameObject newItem) {
+    public void setItem(Item newItem) {
         item = newItem;
         item.transform.SetParent(slotPosition, false);
     }
 
-    public GameObject takeOutItem() {
-        GameObject aux = item;
+    public Item takeItem() {
+        Item aux = item;
         item = null;
         return aux;
     }
 
-    public void highlightObject() {
+    public bool hasItem() {
+        return item != null;
+    }
+
+    public void highlight() {
         if (highlightRenderer != null) {
             highlightRenderer.material.color = new Color(0f, 0f, 1f, 1f);
         }
     }
 
-    public void unhighlightObject() {
+    public void unhighlight() {
         if (highlightRenderer != null) {
             highlightRenderer.material.color = new Color(1f, 1f, 1f, 1f);
         }

@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
 
-    [SerializeField] int playerIndex;
-    [SerializeField] float velocity = 1.0f;
     [SerializeField] PlayerControls playerControls;
+    [SerializeField] float velocity = 1.0f;
+    [SerializeField] int playerIndex;
     CharacterController characterController;
     bool shouldMove = false;
     Vector2 movement = new Vector2();
