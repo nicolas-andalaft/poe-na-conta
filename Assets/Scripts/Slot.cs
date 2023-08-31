@@ -1,25 +1,22 @@
 using UnityEngine;
 
-public class Slot : MonoBehaviour, IInteractable {
+public class Slot : MonoBehaviour {
 
-    [SerializeField] Transform slotPosition;
     [SerializeField] Renderer highlightRenderer;
-    [SerializeField] Item item;
+    [SerializeField] GameObject item;
+    [SerializeField] GameObject destroyOnPickUp;
 
-    void OnEnable() {
-        if (slotPosition == null) {
-            enabled = false;
-        }
-    }
-
-    public void setItem(Item newItem) {
+    public void setItem(GameObject newItem) {
         item = newItem;
-        item.transform.SetParent(slotPosition, false);
+        item.transform.SetParent(transform, false);
     }
 
-    public Item takeItem() {
-        Item aux = item;
+    public GameObject takeItem() {
+        GameObject aux = item;
         item = null;
+        if (destroyOnPickUp != null) {
+            Destroy(destroyOnPickUp, 0.1f);
+        }
         return aux;
     }
 
