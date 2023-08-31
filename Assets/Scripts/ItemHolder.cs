@@ -18,8 +18,7 @@ public class ItemHolder : MonoBehaviour {
 
     public void placeItem(GameObject newItem) {
         item = newItem;
-        item.transform.parent = slotPosition;
-        item.transform.localPosition = Vector3.zero;
+        item.transform.SetParent(slotPosition, false);
     }
 
     public GameObject takeOutItem() {
