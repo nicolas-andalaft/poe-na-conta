@@ -109,10 +109,10 @@ public class ItemHolderDetector : MonoBehaviour {
 
     void onInteract(int playerIndex) {
         if (playerIndex == this.playerIndex && possibleHolders.Any()) {
-            if (playerItemHolder.isEmpty()) {
+            if (playerItemHolder.isEmpty() && !selectedHolder.isEmpty()) {
                 playerItemHolder.placeItem(selectedHolder.takeOutItem());
             }
-            else {
+            else if (!playerItemHolder.isEmpty() && selectedHolder.isEmpty()) {
                 selectedHolder.placeItem(playerItemHolder.takeOutItem());
             }
         }
