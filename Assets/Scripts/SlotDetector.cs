@@ -8,8 +8,8 @@ public class SlotDetector : MonoBehaviour {
 
     [SerializeField] int playerIndex;
     [SerializeField] Slot playerSlot;
-    List<Slot> possibleSlots;
-    Slot selectedSlot;
+    [SerializeField] List<Slot> possibleSlots;
+    [SerializeField] Slot selectedSlot;
     float currDistToSlot;
     bool shouldCheckDistance = false;
     float checkRefreshTime = 0.1f;
@@ -92,8 +92,6 @@ public class SlotDetector : MonoBehaviour {
     }
 
     void selectIfCloser(Slot slot) {
-        if (slot == null) return;
-
         float dist = Vector3.Distance(transform.position, slot.transform.position);
         if (slot == selectedSlot) {
             currDistToSlot = dist;
@@ -106,8 +104,13 @@ public class SlotDetector : MonoBehaviour {
 
     IEnumerator checkObjectsDistance() {
         while (shouldCheckDistance) {
-            foreach (var slot in possibleSlots) {
-                selectIfCloser(slot);
+            for (int i = 0; i < possibleSlots.Count; i++) {
+                if (possibleSlots[i] == null) {
+                    possibleSlots.RemoveAt(i);
+                }
+                else {
+                    selectIfCloser(possibleSlots[i]);
+                }
             }
             yield return new WaitForSeconds(checkRefreshTime);
         }
