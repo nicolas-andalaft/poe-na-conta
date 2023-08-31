@@ -1,16 +1,23 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerControls))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] int playerIndex;
     [SerializeField] float velocity = 1.0f;
-    PlayerControls playerControls;
+    [SerializeField] PlayerControls playerControls;
+    CharacterController characterController;
     bool shouldMove = false;
     Vector2 movement = new Vector2();
 
     void Awake() {
-        playerControls = GetComponent<PlayerControls>();
+        characterController = GetComponent<CharacterController>();
+    }
+
+    void OnEnable() {
+        if (playerControls == null) {
+            enabled = false;
+        }
     }
 
     void Start() {
@@ -26,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
         if (shouldMove) {
             movement = playerControls.getMoveAction().ReadValue<Vector2>();
-            transform.Translate(new Vector3(movement.x, 0, movement.y) * Time.deltaTime * velocity);
+            characterController.Move(new Vector3(movement.x, 0, movement.y) * Time.deltaTime * velocity);
         }
     }
 
