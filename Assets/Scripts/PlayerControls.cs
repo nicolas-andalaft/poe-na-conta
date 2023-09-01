@@ -66,7 +66,6 @@ public class PlayerControls : MonoBehaviour {
     }
 
     public void assignGamepadToPlayer(int gamepadIndex) {
-        Debug.Log(gamepadIndex);
         actionMap.ApplyBindingOverridesOnMatchingControls(Gamepad.all[gamepadIndex]);
     }
 }
