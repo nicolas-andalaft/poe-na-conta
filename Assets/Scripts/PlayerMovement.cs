@@ -21,13 +21,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Start() {
-        EventManager.current.onMovePerformed += startMovement;
-        EventManager.current.onMoveCanceled += stopMovement;
+        EventManager.player(playerIndex).onMovePerformed += startMovement;
+        EventManager.player(playerIndex).onMoveCanceled += stopMovement;
     }
 
     void OnDestroy() {
-        EventManager.current.onMovePerformed -= startMovement;
-        EventManager.current.onMoveCanceled -= stopMovement;
+        EventManager.player(playerIndex).onMovePerformed -= startMovement;
+        EventManager.player(playerIndex).onMoveCanceled -= stopMovement;
     }
 
     void Update() {
@@ -37,15 +37,11 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void startMovement(int playerIndex) {
-        if (playerIndex == this.playerIndex) {
-            shouldMove = true;
-        }
+    public void startMovement() {
+        shouldMove = true;
     }
 
-    public void stopMovement(int playerIndex) {
-        if (playerIndex == this.playerIndex) {
-            shouldMove = false;
-        }
+    public void stopMovement() {
+        shouldMove = false;
     }
 }

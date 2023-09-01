@@ -1,26 +1,22 @@
-using System;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour {
 
-    public static EventManager current { get; private set; }
+    [SerializeField] int playerCount;
+
+    public static EventManager global { get; private set; }
+    public static PlayerEvents[] playerEvents { get; private set; }
 
     void Awake() {
-        current = this;
+        global = this;
+        if (playerCount <= 0) playerCount = 1;
+        playerEvents = new PlayerEvents[playerCount];
+        for (int i = 0; i < playerCount; i++) {
+            playerEvents[i] = new PlayerEvents();
+        }
     }
 
-    public event Action<int> onMovePerformed;
-    public void TriggerOnMovePerformed(int param = 0) {
-        onMovePerformed?.Invoke(param);
-    }
-
-    public event Action<int> onMoveCanceled;
-    public void TriggerOnMoveCanceled(int param = 0) {
-        onMoveCanceled?.Invoke(param);
-    }
-
-    public event Action<int> onFirePerformed;
-    public void TriggerOnFirePerformed(int param = 0) {
-        onFirePerformed?.Invoke(param);
+    public static PlayerEvents player(int playerIndex) {
+        return playerEvents[playerIndex];
     }
 }

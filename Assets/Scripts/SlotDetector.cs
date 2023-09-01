@@ -25,16 +25,16 @@ public class SlotDetector : MonoBehaviour {
     }
 
     void Start() {
-        EventManager.current.onFirePerformed += onInteract;
-        EventManager.current.onMovePerformed += startCheck;
-        EventManager.current.onMoveCanceled += stopCheck;
+        EventManager.player(playerIndex).onFirePerformed += onInteract;
+        EventManager.player(playerIndex).onMovePerformed += startCheck;
+        EventManager.player(playerIndex).onMoveCanceled += stopCheck;
     }
 
     void OnDestroy() {
         StopAllCoroutines();
-        EventManager.current.onFirePerformed -= onInteract;
-        EventManager.current.onMovePerformed -= startCheck;
-        EventManager.current.onMoveCanceled -= stopCheck;
+        EventManager.player(playerIndex).onFirePerformed -= onInteract;
+        EventManager.player(playerIndex).onMovePerformed -= startCheck;
+        EventManager.player(playerIndex).onMoveCanceled -= stopCheck;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -61,13 +61,11 @@ public class SlotDetector : MonoBehaviour {
         }
     }
 
-    void startCheck(int playerIndex) {
-        if (playerIndex != this.playerIndex) return;
+    void startCheck() {
         setDistanceCheck(true);
     }
 
-    void stopCheck(int playerIndex) {
-        if (playerIndex != this.playerIndex) return;
+    void stopCheck() {
         setDistanceCheck(false);
     }
 
@@ -116,8 +114,8 @@ public class SlotDetector : MonoBehaviour {
         }
     }
 
-    void onInteract(int playerIndex) {
-        if (playerIndex != this.playerIndex || !possibleSlots.Any()) return;
+    void onInteract() {
+        if (selectedSlot == null || !possibleSlots.Any()) return;
 
         if (playerSlot.hasItem() && !selectedSlot.hasItem()) {
             selectedSlot.setItem(playerSlot.takeItem());
