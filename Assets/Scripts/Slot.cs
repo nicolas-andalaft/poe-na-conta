@@ -1,10 +1,13 @@
 using UnityEngine;
 
+public enum SlotContentType { Item, Client, Any }
+
 public class Slot : MonoBehaviour {
 
     [SerializeField] Renderer highlightRenderer;
     [SerializeField] GameObject item;
     [SerializeField] GameObject destroyOnPickUp;
+    [SerializeField] SlotContentType contentType;
 
     public void setItem(GameObject newItem) {
         item = newItem;
@@ -22,6 +25,23 @@ public class Slot : MonoBehaviour {
 
     public bool hasItem() {
         return item != null;
+    }
+
+    public bool canTransferTo(Slot destination) {
+        bool isValid = false;
+
+        switch (destination.contentType) {
+            case SlotContentType.Item:
+                isValid = item.CompareTag("Item");
+                break;
+            case SlotContentType.Client:
+                isValid = item.CompareTag("Client");
+                break;
+            case SlotContentType.Any:
+                isValid = true;
+                break;
+        }
+        return isValid;
     }
 
     public void highlight() {

@@ -207,3 +207,4 @@ MonoBehaviour:
   highlightRenderer: {fileID: 5650042798079331062}
   item: {fileID: 0}
   destroyOnPickUp: {fileID: 0}
+  type: 3
