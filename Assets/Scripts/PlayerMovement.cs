@@ -1,16 +1,18 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] PlayerControls playerControls;
     [SerializeField] float velocity = 1.0f;
-    [SerializeField] int playerIndex;
+    Player player;
     CharacterController characterController;
     bool shouldMove = false;
     Vector2 movement = new Vector2();
 
     void Awake() {
+        player = GetComponent<Player>();
         characterController = GetComponent<CharacterController>();
     }
 
@@ -21,13 +23,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Start() {
-        EventManager.player(playerIndex).onMovePerformed += startMovement;
-        EventManager.player(playerIndex).onMoveCanceled += stopMovement;
+        EventManager.player(player.index).onMovePerformed += startMovement;
+        EventManager.player(player.index).onMoveCanceled += stopMovement;
     }
 
     void OnDestroy() {
-        EventManager.player(playerIndex).onMovePerformed -= startMovement;
-        EventManager.player(playerIndex).onMoveCanceled -= stopMovement;
+        EventManager.player(player.index).onMovePerformed -= startMovement;
+        EventManager.player(player.index).onMoveCanceled -= stopMovement;
     }
 
     void Update() {

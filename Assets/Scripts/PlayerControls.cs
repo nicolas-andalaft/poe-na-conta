@@ -1,10 +1,12 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Player))]
 public class PlayerControls : MonoBehaviour {
 
     [SerializeField] InputActionAsset inputActions;
-    [SerializeField] int playerIndex;
+    Player player;
     InputActionMap actionMap;
     InputAction moveAction;
     InputAction fireAction;
@@ -14,40 +16,57 @@ public class PlayerControls : MonoBehaviour {
             enabled = false;
             return;
         }
+        player = GetComponent<Player>();
+
         actionMap = inputActions.FindActionMap("Player").Clone();
-        actionMap.bindingMask = new InputBinding {groups = playerIndex == 0 ? "Keyboard&Mouse;Gamepad" : "Gamepad"};
-        actionMap.ApplyBindingOverridesOnMatchingControls(Gamepad.all[playerIndex]);
+        actionMap.bindingMask = new InputBinding {groups = player.index == 0 ? "Keyboard&Mouse;Gamepad" : "Gamepad"};
+        if (Gamepad.all.Any()) {
+            assignGamepadToPlayer(Gamepad.all.Count-1);
+        }
     }
 
     void OnEnable() {
+        EventManager.global.onGamepadAdded += onGamepadAdded;
+
         moveAction = actionMap.FindAction("Move");
         moveAction.Enable();
-        moveAction.performed += OnMovePerformed;
-        moveAction.canceled += OnMoveCanceled;
+        moveAction.performed += onMovePerformed;
+        moveAction.canceled += onMoveCanceled;
 
         fireAction = actionMap.FindAction("Fire");
         fireAction.Enable();
-        fireAction.performed += OnFirePerformed;
+        fireAction.performed += onFirePerformed;
     }
 
     void OnDisable() {
-        moveAction.Disable();
-        fireAction.Disable();
+        moveAction?.Disable();
+        fireAction?.Disable();
     }
 
-    void OnMovePerformed(InputAction.CallbackContext context) {
-        EventManager.player(playerIndex).TriggerOnMovePerformed();
+    void onGamepadAdded(int gamepadIndex) {
+        if (gamepadIndex != player.index) return;
+
+        assignGamepadToPlayer(gamepadIndex);
     }
 
-    void OnMoveCanceled(InputAction.CallbackContext context) {
-        EventManager.player(playerIndex).TriggerOnMoveCanceled();
+    void onMovePerformed(InputAction.CallbackContext context) {
+        EventManager.player(player.index).TriggerOnMovePerformed();
     }
 
-    void OnFirePerformed(InputAction.CallbackContext context) {
-        EventManager.player(playerIndex).TriggerOnFirePerformed();
+    void onMoveCanceled(InputAction.CallbackContext context) {
+        EventManager.player(player.index).TriggerOnMoveCanceled();
+    }
+
+    void onFirePerformed(InputAction.CallbackContext context) {
+        EventManager.player(player.index).TriggerOnFirePerformed();
     }
 
     public InputAction getMoveAction() {
         return moveAction;
+    }
+
+    public void assignGamepadToPlayer(int gamepadIndex) {
+        Debug.Log(gamepadIndex);
+        actionMap.ApplyBindingOverridesOnMatchingControls(Gamepad.all[gamepadIndex]);
     }
 }

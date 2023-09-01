@@ -4,17 +4,19 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Player))]
 public class SlotDetector : MonoBehaviour {
 
-    [SerializeField] int playerIndex;
     [SerializeField] Slot playerSlot;
     [SerializeField] List<Slot> possibleSlots;
     [SerializeField] Slot selectedSlot;
+    Player player;
     float currDistToSlot;
     bool shouldCheckDistance = false;
     float checkRefreshTime = 0.1f;
 
     void Awake() {
+        player = GetComponent<Player>();
         possibleSlots = new List<Slot>();
     }
 
@@ -25,16 +27,16 @@ public class SlotDetector : MonoBehaviour {
     }
 
     void Start() {
-        EventManager.player(playerIndex).onFirePerformed += onInteract;
-        EventManager.player(playerIndex).onMovePerformed += startCheck;
-        EventManager.player(playerIndex).onMoveCanceled += stopCheck;
+        EventManager.player(player.index).onFirePerformed += onInteract;
+        EventManager.player(player.index).onMovePerformed += startCheck;
+        EventManager.player(player.index).onMoveCanceled += stopCheck;
     }
 
     void OnDestroy() {
         StopAllCoroutines();
-        EventManager.player(playerIndex).onFirePerformed -= onInteract;
-        EventManager.player(playerIndex).onMovePerformed -= startCheck;
-        EventManager.player(playerIndex).onMoveCanceled -= stopCheck;
+        EventManager.player(player.index).onFirePerformed -= onInteract;
+        EventManager.player(player.index).onMovePerformed -= startCheck;
+        EventManager.player(player.index).onMoveCanceled -= stopCheck;
     }
 
     void OnTriggerEnter(Collider other) {
