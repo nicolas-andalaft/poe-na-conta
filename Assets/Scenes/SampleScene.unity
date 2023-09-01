@@ -255,6 +255,10 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 1388479401}
+    - target: {fileID: 2888221011172947392, guid: 0dff2ed90993a0b499d20eb47432adac, type: 3}
+      propertyPath: package
+      value: 
+      objectReference: {fileID: 1388479401}
     - target: {fileID: 5547553602137501571, guid: 0dff2ed90993a0b499d20eb47432adac, type: 3}
       propertyPath: item
       value: 
@@ -624,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clientsContainer: {fileID: 1047233851}
-  clientPrefab: {fileID: 3576079560663064478, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
+  clientPrefab: {fileID: 7339463497678549397, guid: 88595485248fad947a20ba8423a06fbc, type: 3}
   spawnInterval: 5
   spawnLimit: 5
   isRunning: 1
@@ -949,6 +953,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2888221011172947392, guid: 0dff2ed90993a0b499d20eb47432adac, type: 3}
       propertyPath: item
+      value: 
+      objectReference: {fileID: 713285409}
+    - target: {fileID: 2888221011172947392, guid: 0dff2ed90993a0b499d20eb47432adac, type: 3}
+      propertyPath: package
       value: 
       objectReference: {fileID: 713285409}
     - target: {fileID: 5547553602137501571, guid: 0dff2ed90993a0b499d20eb47432adac, type: 3}

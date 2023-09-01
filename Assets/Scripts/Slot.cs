@@ -1,43 +1,43 @@
 using UnityEngine;
 
-public enum SlotContentType { Item, Client, Any }
+public enum SlotPackageType { Item, Client, Any }
 
 public class Slot : MonoBehaviour {
 
     [SerializeField] Renderer highlightRenderer;
-    [SerializeField] GameObject item;
+    [SerializeField] GameObject package;
     [SerializeField] GameObject destroyOnPickUp;
-    [SerializeField] SlotContentType contentType;
+    [SerializeField] SlotPackageType packageType;
 
-    public void setItem(GameObject newItem) {
-        item = newItem;
-        item.transform.SetParent(transform, false);
+    public void setPackage(GameObject newPackage) {
+        package = newPackage;
+        package.transform.SetParent(transform, false);
     }
 
-    public GameObject takeItem() {
-        GameObject aux = item;
-        item = null;
+    public GameObject takePackage() {
+        GameObject aux = package;
+        package = null;
         if (destroyOnPickUp != null) {
             Destroy(destroyOnPickUp, 0.1f);
         }
         return aux;
     }
 
-    public bool hasItem() {
-        return item != null;
+    public bool hasPackage() {
+        return package != null;
     }
 
-    public bool canTransferTo(Slot destination) {
+    public bool canBeTransferedTo(Slot destination) {
         bool isValid = false;
 
-        switch (destination.contentType) {
-            case SlotContentType.Item:
-                isValid = item.CompareTag("Item");
+        switch (destination.packageType) {
+            case SlotPackageType.Item:
+                isValid = package.CompareTag("Item");
                 break;
-            case SlotContentType.Client:
-                isValid = item.CompareTag("Client");
+            case SlotPackageType.Client:
+                isValid = package.CompareTag("Client");
                 break;
-            case SlotContentType.Any:
+            case SlotPackageType.Any:
                 isValid = true;
                 break;
         }

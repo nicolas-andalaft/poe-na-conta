@@ -67,9 +67,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightRenderer: {fileID: 8384527942565053083}
-  item: {fileID: 0}
+  package: {fileID: 0}
   destroyOnPickUp: {fileID: 0}
-  contentType: 1
+  packageType: 1
 --- !u!1 &5516321533559668115
 GameObject:
   m_ObjectHideFlags: 0
