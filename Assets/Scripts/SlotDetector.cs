@@ -119,11 +119,11 @@ public class SlotDetector : MonoBehaviour {
     void onInteract() {
         if (selectedSlot == null || !possibleSlots.Any()) return;
 
-        if (playerSlot.hasPackage() && !selectedSlot.hasPackage() && playerSlot.canBeTransferedTo(selectedSlot)) {
-            selectedSlot.setPackage(playerSlot.takePackage());
+        if (playerSlot.hasPackage() && !selectedSlot.hasPackage()) {
+            playerSlot.transferTo(selectedSlot);
         }
-        else if (!playerSlot.hasPackage() && selectedSlot.hasPackage() && selectedSlot.canBeTransferedTo(playerSlot)) {
-            playerSlot.setPackage(selectedSlot.takePackage());
+        else if (!playerSlot.hasPackage() && selectedSlot.hasPackage()) {
+            selectedSlot.transferTo(playerSlot);
         }
     }
 }

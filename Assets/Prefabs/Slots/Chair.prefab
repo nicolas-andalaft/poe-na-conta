@@ -70,6 +70,8 @@ MonoBehaviour:
   package: {fileID: 0}
   destroyOnPickUp: {fileID: 0}
   packageType: 1
+  input: 1
+  output: 0
 --- !u!1 &5516321533559668115
 GameObject:
   m_ObjectHideFlags: 0

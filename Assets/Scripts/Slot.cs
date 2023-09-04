@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum SlotPackageType { Item, Client, Any }
 
@@ -8,19 +9,25 @@ public class Slot : MonoBehaviour {
     [SerializeField] GameObject package;
     [SerializeField] GameObject destroyOnPickUp;
     [SerializeField] SlotPackageType packageType;
+    [SerializeField] UnityEvent onPackageDelivered;
+    [SerializeField] bool input = true;
+    [SerializeField] bool output = true;
+
+    public void transferTo(Slot destination) {
+        if (!output || !destination.input || !canBeTransferedTo(destination)) return;
+
+        destination.setPackage(package);
+        package = null;
+
+        if (destroyOnPickUp != null) {
+            Destroy(destroyOnPickUp, 0.1f);
+        }
+    }
 
     public void setPackage(GameObject newPackage) {
         package = newPackage;
         package.transform.SetParent(transform, false);
-    }
-
-    public GameObject takePackage() {
-        GameObject aux = package;
-        package = null;
-        if (destroyOnPickUp != null) {
-            Destroy(destroyOnPickUp, 0.1f);
-        }
-        return aux;
+        onPackageDelivered.Invoke();
     }
 
     public bool hasPackage() {

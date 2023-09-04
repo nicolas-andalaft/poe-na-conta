@@ -16,9 +16,4 @@ public class PlayerEvents {
     public void TriggerOnFirePerformed() {
         onFirePerformed?.Invoke();
     }
-
-    public event Action<Slot> onItemPickedUp;
-    public void TriggerOnItemPickedUp(Slot slotContainer) {
-        onItemPickedUp?.Invoke(slotContainer);
-    }
 }

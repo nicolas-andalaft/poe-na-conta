@@ -155,6 +155,8 @@ MonoBehaviour:
   package: {fileID: 0}
   destroyOnPickUp: {fileID: 0}
   packageType: 2
+  input: 1
+  output: 1
 --- !u!1 &4310501180865754080
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControls: {fileID: -2354039175883093837}
-  velocity: 5
+  velocity: 7
 --- !u!114 &1693469078612801891
 MonoBehaviour:
   m_ObjectHideFlags: 0
