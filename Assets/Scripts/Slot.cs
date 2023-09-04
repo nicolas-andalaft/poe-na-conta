@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum SlotPackageType { Item, Client, Any }
+public enum SlotPackageType { Item, Food, Order, Client, Any }
 
 public class Slot : MonoBehaviour {
 
     [SerializeField] Renderer highlightRenderer;
     [SerializeField] GameObject package;
-    [SerializeField] GameObject destroyOnPickUp;
     [SerializeField] SlotPackageType packageType;
     [SerializeField] UnityEvent onPackageDelivered;
+    [SerializeField] UnityEvent onPackageArrived;
     [SerializeField] bool input = true;
     [SerializeField] bool output = true;
 
@@ -19,15 +19,25 @@ public class Slot : MonoBehaviour {
         destination.setPackage(package);
         package = null;
 
-        if (destroyOnPickUp != null) {
-            Destroy(destroyOnPickUp, 0.1f);
-        }
+        onPackageDelivered.Invoke();
+        destination.onPackageArrived.Invoke();
     }
 
     public void setPackage(GameObject newPackage) {
+        if (newPackage == null) return;
         package = newPackage;
         package.transform.SetParent(transform, false);
-        onPackageDelivered.Invoke();
+    }
+
+    public void destroyPackage() {
+        if (package != null) {
+            Destroy(package.gameObject);
+        }
+        package = null;
+    }
+
+    public void destroySelf() {
+        Destroy(gameObject);
     }
 
     public bool hasPackage() {
@@ -38,17 +48,31 @@ public class Slot : MonoBehaviour {
         bool isValid = false;
 
         switch (destination.packageType) {
-            case SlotPackageType.Item:
-                isValid = package.CompareTag("Item");
+            case SlotPackageType.Food:
+                isValid = package.CompareTag("Food");
+                break;
+            case SlotPackageType.Order:
+                isValid = package.CompareTag("Order");
                 break;
             case SlotPackageType.Client:
                 isValid = package.CompareTag("Client");
+                break;
+            case SlotPackageType.Item:
+                isValid = !package.CompareTag("Client");
                 break;
             case SlotPackageType.Any:
                 isValid = true;
                 break;
         }
         return isValid;
+    }
+
+    public void setInputLock(bool value) {
+        input = value;
+    }
+
+    public void setOutputLock(bool value) {
+        output = value;
     }
 
     public void highlight() {

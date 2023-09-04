@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5327797115303046426}
+  - {fileID: 6608352569105966142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3806632265688719158
@@ -67,11 +67,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749eb831e381459449d74de19a988be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightRenderer: {fileID: 5628228589514616798}
-  package: {fileID: 8313098376973673850}
-  destroyOnPickUp: {fileID: 7339463497678549397}
-  packageType: 1
---- !u!1001 &2504748501952523498
+  highlightRenderer: {fileID: 6655980004432914170}
+  package: {fileID: 6997389256192732254}
+  packageType: 3
+  onPackageDelivered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6002411223842733518}
+        m_TargetAssemblyTypeName: Slot, Assembly-CSharp
+        m_MethodName: destroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPackageArrived:
+    m_PersistentCalls:
+      m_Calls: []
+  input: 1
+  output: 1
+--- !u!1001 &3496783308010202574
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -128,18 +147,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
---- !u!4 &5327797115303046426 stripped
+--- !u!4 &6608352569105966142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7724381731950641648, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
-  m_PrefabInstance: {fileID: 2504748501952523498}
+  m_PrefabInstance: {fileID: 3496783308010202574}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &5628228589514616798 stripped
+--- !u!23 &6655980004432914170 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7843541469089825588, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
-  m_PrefabInstance: {fileID: 2504748501952523498}
+  m_PrefabInstance: {fileID: 3496783308010202574}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8313098376973673850 stripped
+--- !u!1 &6997389256192732254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5880761650335058320, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
-  m_PrefabInstance: {fileID: 2504748501952523498}
+  m_PrefabInstance: {fileID: 3496783308010202574}
   m_PrefabAsset: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3131313140511546607}
   m_Layer: 7
-  m_Name: Item
+  m_Name: Food
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

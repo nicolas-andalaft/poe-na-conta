@@ -69,7 +69,10 @@ MonoBehaviour:
   highlightRenderer: {fileID: 8384527942565053083}
   package: {fileID: 0}
   destroyOnPickUp: {fileID: 0}
-  packageType: 1
+  packageType: 3
+  onPackageDelivered:
+    m_PersistentCalls:
+      m_Calls: []
   input: 1
   output: 0
 --- !u!1 &5516321533559668115
