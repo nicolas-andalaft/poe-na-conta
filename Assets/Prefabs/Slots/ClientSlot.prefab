@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749eb831e381459449d74de19a988be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightRenderer: {fileID: 6655980004432914170}
+  highlightMaterial: {fileID: 2100000, guid: df2a03836f9570e44a93ce1f829d5e63, type: 2}
+  highlightRenderer: {fileID: 6003008766033696046}
   package: {fileID: 6997389256192732254}
   packageType: 3
   onPackageDelivered:
@@ -147,14 +148,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
+--- !u!23 &6003008766033696046 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7190534803581055200, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
+  m_PrefabInstance: {fileID: 3496783308010202574}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6608352569105966142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7724381731950641648, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
-  m_PrefabInstance: {fileID: 3496783308010202574}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6655980004432914170 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7843541469089825588, guid: a50f0b94919a9644f91dee7b05c77274, type: 3}
   m_PrefabInstance: {fileID: 3496783308010202574}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6997389256192732254 stripped

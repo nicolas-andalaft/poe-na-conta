@@ -1,10 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public enum SlotPackageType { Item, Food, Order, Client, Any }
 
 public class Slot : MonoBehaviour {
 
+    static List<Material> highlightedMaterialList;
+
+    [SerializeField] Material highlightMaterial;
     [SerializeField] Renderer highlightRenderer;
     [SerializeField] GameObject package;
     [SerializeField] SlotPackageType packageType;
@@ -77,13 +82,13 @@ public class Slot : MonoBehaviour {
 
     public void highlight() {
         if (highlightRenderer != null) {
-            highlightRenderer.material.color = new Color(0f, 0f, 1f, 1f);
+            highlightRenderer.material = highlightMaterial;
         }
     }
 
     public void unhighlight() {
         if (highlightRenderer != null) {
-            highlightRenderer.material.color = new Color(1f, 1f, 1f, 1f);
+            highlightRenderer.material = GraphicsSettings.defaultRenderPipeline.defaultMaterial;
         }
     }
 }

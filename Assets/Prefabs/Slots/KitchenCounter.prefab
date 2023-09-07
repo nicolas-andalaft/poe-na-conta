@@ -138,7 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749eb831e381459449d74de19a988be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightRenderer: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: df2a03836f9570e44a93ce1f829d5e63, type: 2}
+  highlightRenderer: {fileID: 1904610812185227034}
   package: {fileID: 0}
   packageType: 2
   onPackageDelivered:
